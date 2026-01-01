@@ -1,0 +1,54 @@
+name: "🛠️ Report a Broken Tool ID"
+description: "Help us keep the registry accurate by reporting dead or outdated IDs"
+title: "🐞 [FIX]: <Tool Name> ID is broken"
+labels: ["🚨 bug", "⚡ priority"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 🔍 Broken ID Report
+        Thank you for helping us maintain the **Universal Developer Registry**. Please provide details about the broken package below.
+
+  - type: input
+    id: tool_id
+    attributes:
+      label: "🆔 Registry ID"
+      description: "The unique ID used in our os_tools.json"
+      placeholder: "e.g., vscode"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: "💻 Which platform is broken?"
+      options:
+        - 🪟 WinGet (Windows)
+        - 🍎 Homebrew (macOS)
+        - 🌐 Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_details
+    attributes:
+      label: "⚠️ Error Details"
+      description: "Paste the error message or describe what happened."
+      placeholder: "e.g., 'ID not found', 'Hash mismatch', or 'Version 404'"
+    validations:
+      required: true
+
+  - type: input
+    id: suggested_fix
+    attributes:
+      label: "💡 Suggested New ID (Optional)"
+      description: "If you found the correct ID, let us know!"
+      placeholder: "e.g., Microsoft.VisualStudioCode.Insiders"
+
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: "✅ Final Check"
+      options:
+        - label: "I have confirmed this ID is currently failing on my system."
+          required: true
