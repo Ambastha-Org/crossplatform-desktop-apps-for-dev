@@ -1,0 +1,103 @@
+name: "🛡️ Issue Gatekeeper"
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  verify:
+    name: "🔍 Verification"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: "🪟 WinGet ID"
+            script: "scripts/check_winget.sh"
+          - os: macos-latest
+            label: "🍎 Homebrew ID"
+            script: "scripts/check_brew.sh"
+    runs-on: ${{ matrix.os }}
+    outputs:
+      win_found: ${{ steps.results.outputs.win_found }}
+      win_sug: ${{ steps.results.outputs.win_sug }}
+      brew_found: ${{ steps.results.outputs.brew_found }}
+      brew_sug: ${{ steps.results.outputs.brew_sug }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Search Script
+        id: run_script
+        shell: bash
+        run: |
+          BODY="${{ github.event.issue.body }}"
+          ID=$(echo "$BODY" | grep -A 2 "${{ matrix.label }}" | tail -n 1 | xargs)
+          chmod +x ${{ matrix.script }}
+          ./${{ matrix.script }} "$ID" > output.txt
+
+      - name: Set Outputs
+        id: results
+        shell: bash
+        run: |
+          while IFS='=' read -r key value; do
+            if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+              echo "win_$key=$value" >> $GITHUB_OUTPUT
+            else
+              echo "brew_$key=$value" >> $GITHUB_OUTPUT
+            fi
+          done < output.txt
+
+  aggregate:
+    name: "🔗 Process & Respond"
+    needs: verify
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Handle Logic
+        id: logic
+        uses: actions/github-script@v7
+        env:
+          WIN_FOUND: ${{ needs.verify.outputs.win_found }}
+          BREW_FOUND: ${{ needs.verify.outputs.brew_found }}
+          WIN_SUG: ${{ needs.verify.outputs.win_sug }}
+          BREW_SUG: ${{ needs.verify.outputs.brew_sug }}
+        with:
+          script: |
+            const script = require('./scripts/issue_aggregator.js')
+            await script({github, context, core})
+
+      - name: "🚀 Run PR Logic"
+        if: success() && (needs.verify.outputs.win_found == 'true' || needs.verify.outputs.brew_found == 'true')
+        run: |
+          WIN_ID="${{ needs.verify.outputs.win_found == 'true' && needs.verify.outputs.win_sug || '' }}"
+          BREW_ID="${{ needs.verify.outputs.brew_found == 'true' && needs.verify.outputs.brew_sug || '' }}"
+
+          # Pass a hardcoded safe description to avoid malicious user input in the JSON
+          echo "{\"win_id\":\"$WIN_ID\", \"brew_id\":\"$BREW_ID\", \"description\":\"Added via automated tool request 🤖\"}" > /tmp/entry.json
+          python3 scripts/add_tool_entry.py /tmp/entry.json
+
+      - name: "📤 Create or Update PR"
+        if: success() && (needs.verify.outputs.win_found == 'true' || needs.verify.outputs.brew_found == 'true')
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "automated-tool-updates"
+          commit-message: "feat: update os_tools.json with verified entries 🤖"
+          title: "🚀 [Automated] New Tool Proposals"
+          body: |
+            This PR contains verified tool requests from the community.
+
+            **Latest contribution from Issue #${{ github.event.issue.number }}:**
+            - WinGet: ${{ needs.verify.outputs.win_found == 'true' && needs.verify.outputs.win_sug || 'N/A' }}
+            - Homebrew: ${{ needs.verify.outputs.brew_found == 'true' && needs.verify.outputs.brew_sug || 'N/A' }}
+
+            *Review the changes in `os_tools.json` and merge when ready.*

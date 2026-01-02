@@ -25,41 +25,15 @@ jobs:
         if: matrix.os == 'windows-latest'
         id: winget_check
         shell: pwsh
-        run: |
-          Write-Host "🚀 Scanning for Win32 ID changes..."
-          $changed = git diff origin/main -U0 os_tools.json | Select-String '"win32":\s*"([^"]+)"'
-          foreach ($match in $changed) {
-            $id = $match.Matches.Groups[1].Value
-            Write-Host "🔎 Testing: $id"
-            winget show --id $id --accept-source-agreements
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "❌ ID Not Found. Searching for alternatives..."
-              $search = winget search $id | Select-Object -Skip 4 -First 1 | ForEach-Object { $_.split(' ')[0] }
-              echo "suggestion=$search" >> $env:GITHUB_OUTPUT
-              echo "failed_id=$id" >> $env:GITHUB_OUTPUT
-              exit 1
-            }
-          }
-          Write-Host "✅ All WinGet IDs verified."
+        run: ./scripts/verify_winget.ps1
 
-      # MACOS LOGIC
       - name: "🍎 Homebrew Verification"
         if: matrix.os == 'macos-latest'
         id: brew_check
+        shell: bash
         run: |
-          echo "🚀 Scanning for Darwin ID changes..."
-          CHANGED_IDS=$(git diff origin/main -U0 os_tools.json | grep -oP '"darwin":\s*"\K[^"]+')
-          for id in $CHANGED_IDS; do
-            echo "🔎 Testing: $id"
-            if ! brew info --cask $id >/dev/null 2>&1 && ! brew info $id >/dev/null 2>&1; then
-              echo "❌ ID Not Found. Searching for alternatives..."
-              SUGGESTION=$(brew search $id | head -n 1)
-              echo "suggestion=$SUGGESTION" >> $GITHUB_OUTPUT
-              echo "failed_id=$id" >> $GITHUB_OUTPUT
-              exit 1
-            fi
-          done
-          echo "✅ All Homebrew IDs verified."
+          chmod +x ./scripts/verify_brew.sh
+          ./scripts/verify_brew.sh
 
       - name: "🤖 Post Suggestion"
         if: failure()

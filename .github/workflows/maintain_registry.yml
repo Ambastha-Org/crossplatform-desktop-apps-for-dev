@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: registry-maintenance
+  cancel-in-progress: true
+
 jobs:
   reformat-and-update:
     name: "🧹 Reformat & Update Metadata"
@@ -17,25 +21,25 @@ jobs:
       - name: "🚚 Checkout Repository"
         uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
 
-      # Set up Python environment
       - name: "🐍 Set up Python"
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
-      # Execute the reformatting script
       - name: "🧪 Run Reformatter"
-        working-directory: .
         run: python scripts/reformat_json.py
 
-      # Check for changes and push if necessary
       - name: "📤 Commit & Push Changes"
         run: |
           git config --global user.name "Registry-Bot 🤖"
           git config --global user.email "actions@github.com"
           git add os_tools.json
-          # Only commit if changes were actually made by the script
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: 🚀 auto-reformat and update timestamp" && git push)
+          # Git diff check to see if sorting/metadata changed the file
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: 🚀 auto-sort registry and update timestamp"
+            git push
+          fi

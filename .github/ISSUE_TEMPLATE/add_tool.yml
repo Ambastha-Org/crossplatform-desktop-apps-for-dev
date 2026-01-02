@@ -9,6 +9,8 @@ body:
         ### 🌟 New Tool Proposal
         Thank you for contributing! Our goal is to map tools that exist on both **Windows** and **macOS** to help developers stay consistent across platforms.
 
+        ⚠️ **Important:** To maintain a clean registry, our bot will automatically scan for duplicates. If the tool or ID already exists, this issue will be **automatically closed** with a reference to the existing entry.
+
   - type: input
     id: tool_name
     attributes:
