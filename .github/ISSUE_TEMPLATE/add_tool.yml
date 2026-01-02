@@ -7,15 +7,12 @@ body:
     attributes:
       value: |
         ### 🌟 New Tool Proposal
-        Thank you for contributing! Our goal is to map tools that exist on both **Windows** and **macOS** to help developers stay consistent across platforms.
-
-        ⚠️ **Important:** To maintain a clean registry, our bot will automatically scan for duplicates. If the tool or ID already exists, this issue will be **automatically closed** with a reference to the existing entry.
+        Thank you for contributing! Our bot will verify these IDs and check for duplicates.
 
   - type: input
     id: tool_name
     attributes:
       label: "📛 Tool Name"
-      description: "What is the official name of the tool?"
       placeholder: "e.g., MongoDB Compass"
     validations:
       required: true
@@ -24,8 +21,7 @@ body:
     id: description
     attributes:
       label: "📝 Short Description"
-      description: "Briefly explain what this tool does for developers."
-      placeholder: "e.g., The GUI for MongoDB that lets you visualize and explore your data."
+      placeholder: "Briefly explain what this tool does."
     validations:
       required: true
 
@@ -33,7 +29,6 @@ body:
     id: winget_id
     attributes:
       label: "🪟 WinGet ID (Windows)"
-      description: "The exact ID from `winget search`."
       placeholder: "e.g., MongoDB.Compass.Full"
     validations:
       required: true
@@ -42,15 +37,21 @@ body:
     id: brew_id
     attributes:
       label: "🍎 Homebrew ID (macOS/Darwin)"
-      description: "The exact ID from `brew search` (Cask or Formula)."
       placeholder: "e.g., mongodb-compass"
     validations:
       required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 🤖 Internal Registry Data (Do Not Edit)
+        *The bot will automatically extract data from the fields above.*
 
   - type: checkboxes
     id: verification
     attributes:
       label: "✅ Verification Step"
       options:
-        - label: "I have verified these IDs exist via `winget show` or `brew info`."
+        - label: "I have verified these IDs exist."
           required: true

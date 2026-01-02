@@ -1,31 +1,25 @@
-Write-Host "🚀 Scanning for Win32 ID changes..."
+param([string]$PackageId = $env:REQ_WIN_ID)
 
-$changed = git diff origin/main -U0 os_tools.json | Select-String '"win32":\s*"([^"]+)"'
+$found = $false
+$suggestion = "none"
 
-if ($null -eq $changed) {
-    Write-Host "✅ No Win32 ID changes detected."
-    exit 0
-}
-
-foreach ($match in $changed) {
-    $id = $match.Matches.Groups[1].Value
-    Write-Host "🔎 Testing: $id"
-    
-    # Run winget show
-    winget show --id $id --accept-source-agreements --accept-package-agreements
-    
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ ID Not Found. Searching for alternatives..."
-        $search = winget search $id | Select-Object -Skip 4 -First 1 | ForEach-Object { 
-            $_.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)[0] 
+$null = winget show --id $PackageId --accept-source-agreements
+if ($LASTEXITCODE -eq 0) {
+    $found = $true
+} else {
+    $searchResult = winget search $PackageId --accept-source-agreements | Select-Object -Skip 4 -First 1
+    if ($searchResult) {
+        $parts = $searchResult -split '\s+'
+        if ($parts.Count -gt 1) {
+            $suggestion = $parts[1]
         }
-        
-        if ($env:GITHUB_OUTPUT) {
-            "suggestion=$search" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-            "failed_id=$id" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-        }
-        exit 1
     }
 }
 
-Write-Host "✅ All WinGet IDs verified."
+$result = @{
+    found = $found
+    suggestion = $suggestion
+    platform = "winget"
+} | ConvertTo-Json -Compress
+Write-Output "RESULT_JSON=$result"
+exit 0

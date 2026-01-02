@@ -13,7 +13,7 @@ body:
     id: tool_id
     attributes:
       label: "🆔 Registry ID"
-      description: "The unique ID used in our os_tools.json"
+      description: "The unique ID used in our `os_tools.json`"
       placeholder: "e.g., vscode"
     validations:
       required: true
@@ -33,7 +33,6 @@ body:
     id: error_details
     attributes:
       label: "⚠️ Error Details"
-      description: "Paste the error message or describe what happened."
       placeholder: "e.g., 'ID not found', 'Hash mismatch', or 'Version 404'"
     validations:
       required: true
@@ -42,8 +41,19 @@ body:
     id: suggested_fix
     attributes:
       label: "💡 Suggested New ID (Optional)"
-      description: "If you found the correct ID, let us know!"
       placeholder: "e.g., Microsoft.VisualStudioCode.Insiders"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 🤖 Internal Registry Data (Do Not Edit)
+        ```yaml
+        type: broken-id
+        id: ${{ github.event.inputs.tool_id }}
+        platform: ${{ github.event.inputs.platform }}
+        fix: ${{ github.event.inputs.suggested_fix }}
+        ```
 
   - type: checkboxes
     id: verification

@@ -15,17 +15,38 @@ jobs:
     runs-on: ${{ matrix.os }}
     permissions:
       pull-requests: write
+      contents: read
     steps:
       - name: "🚚 Checkout Repository"
         uses: actions/checkout@v4
+
+      - name: Ensure Labels Exist
+        uses: actions/github-script@v7
         with:
-          fetch-depth: 0
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const labels = ['🚫 duplicate','✅ auto-verified','🔥 confirmed-broken','🧪 needs-verification','✨ new-tool','🚨 bug'];
+            for (const name of labels) {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name });
+              } catch (e) {
+                await github.rest.issues.createLabel({ owner, repo, name, color: 'ededed' });
+              }
+            }
 
       - name: "🪟 WinGet Verification"
         if: matrix.os == 'windows-latest'
         id: winget_check
         shell: pwsh
-        run: ./scripts/verify_winget.ps1
+        run: |
+          ./scripts/verify_winget.ps1
+          $out = Get-Content output.txt | Out-String
+          if ($out -match "RESULT_JSON=(.*)") {
+            $json = $matches[1] | ConvertFrom-Json
+            echo "found=$($json.found)" >> $env:GITHUB_OUTPUT
+            echo "suggestion=$($json.suggestion)" >> $env:GITHUB_OUTPUT
+          }
 
       - name: "🍎 Homebrew Verification"
         if: matrix.os == 'macos-latest'
@@ -33,20 +54,21 @@ jobs:
         shell: bash
         run: |
           chmod +x ./scripts/verify_brew.sh
-          ./scripts/verify_brew.sh
+          ./scripts/verify_brew.sh > output.txt
+          DATA=$(grep "RESULT_JSON=" output.txt | sed 's/RESULT_JSON=//')
+          echo "found=$(echo $DATA | jq -r .found)" >> $env:GITHUB_OUTPUT
+          echo "suggestion=$(echo $DATA | jq -r .suggestion)" >> $env:GITHUB_OUTPUT
 
       - name: "🤖 Post Suggestion"
-        if: failure()
+        if: steps.winget_check.outputs.found == 'false' || steps.brew_check.outputs.found == 'false'
         uses: thollander/actions-comment-pull-request@v3
         with:
           message: |
             ### 🤖 Registry-Bot Auto-Fix Suggestion
-            The ID you provided was not found on **${{ matrix.os }}** ❌.
+            An ID provided for **${{ matrix.os }}** was not found ❌.
 
-            **Original ID:** `${{ steps.winget_check.outputs.failed_id }}${{ steps.brew_check.outputs.failed_id }}`
             **Suggested ID:** `${{ steps.winget_check.outputs.suggestion }}${{ steps.brew_check.outputs.suggestion }}` ✨
 
             ```suggestion
             "${{ matrix.os == 'windows-latest' && 'win32' || 'darwin' }}": "${{ steps.winget_check.outputs.suggestion }}${{ steps.brew_check.outputs.suggestion }}"
             ```
-            *Please verify this suggestion and click **Commit suggestion** to fix the PR!*
