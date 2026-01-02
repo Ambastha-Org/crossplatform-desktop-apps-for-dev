@@ -71,16 +71,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Verification
-        id: run_script
-        shell: ${{ matrix.os == 'windows-latest' && 'pwsh' || 'bash' }}
+      - name: Run Verification (Windows)
+        if: matrix.os == 'windows-latest'
+        id: run_script_win
+        shell: pwsh
         run: |
-          if ("${{ matrix.os }}" -eq "windows-latest") {
-            ./${{ matrix.script }} > output.txt
-          } else {
-            chmod +x ./${{ matrix.script }}
-            ./${{ matrix.script }} > output.txt
-          }
+          Write-Host "Running ${{ matrix.script }} on Windows"
+          # run the PowerShell verifier; write stdout to output.txt
+          & ./${{ matrix.script }} | Out-File -FilePath output.txt -Encoding utf8
+          Get-Content output.txt
+
+      - name: Run Verification (macOS)
+        if: matrix.os == 'macos-latest'
+        id: run_script_mac
+        shell: bash
+        run: |
+          echo "Running ${{ matrix.script }} on macOS"
+          chmod +x ./${{ matrix.script }}
+          ./${{ matrix.script }} > output.txt
           cat output.txt
 
       - name: Capture JSON Result
