@@ -5,138 +5,12 @@
     },
     "os_tools": [
         {
-            "id": "vscode",
-            "name": "Visual Studio Code",
-            "description": "Extensible, open-source code editor with powerful debugging and ecosystem support.",
-            "platforms": {
-                "win32": "Microsoft.VisualStudioCode",
-                "darwin": "visual-studio-code"
-            }
-        },
-        {
-            "id": "intellij_ce",
-            "name": "IntelliJ IDEA Community",
-            "description": "Leading Java and Kotlin IDE for professional JVM development.",
-            "platforms": {
-                "win32": "JetBrains.IntelliJIDEA.Community",
-                "darwin": "intellij-idea-ce"
-            }
-        },
-        {
-            "id": "pycharm_ce",
-            "name": "PyCharm Community",
-            "description": "Intelligent Python IDE with smart code completion and refactoring tools.",
-            "platforms": {
-                "win32": "JetBrains.PyCharm.Community",
-                "darwin": "pycharm-ce"
-            }
-        },
-        {
-            "id": "webstorm",
-            "name": "WebStorm",
-            "description": "Professional IDE for JavaScript and TypeScript development.",
-            "platforms": {
-                "win32": "JetBrains.WebStorm",
-                "darwin": "webstorm"
-            }
-        },
-        {
-            "id": "goland",
-            "name": "GoLand",
-            "description": "Ergonomic IDE designed specifically for Go development.",
-            "platforms": {
-                "win32": "JetBrains.GoLand",
-                "darwin": "goland"
-            }
-        },
-        {
-            "id": "clion",
-            "name": "CLion",
-            "description": "Cross-platform C and C++ IDE with native build system support.",
-            "platforms": {
-                "win32": "JetBrains.CLion",
-                "darwin": "clion"
-            }
-        },
-        {
-            "id": "rider",
-            "name": "Rider",
-            "description": "Fast, cross-platform .NET IDE based on IntelliJ and ReSharper.",
-            "platforms": {
-                "win32": "JetBrains.Rider",
-                "darwin": "rider"
-            }
-        },
-        {
-            "id": "eclipse",
-            "name": "Eclipse IDE",
-            "description": "Classic, extensible IDE for Java, C++, and web development.",
-            "platforms": {
-                "win32": "EclipseFoundation.EclipseIDE",
-                "darwin": "eclipse-jee"
-            }
-        },
-        {
-            "id": "netbeans",
-            "name": "NetBeans",
-            "description": "Apache's Java-focused IDE with built-in support for Maven and Gradle.",
-            "platforms": {
-                "win32": "Apache.NetBeans",
-                "darwin": "netbeans"
-            }
-        },
-        {
             "id": "android_studio",
             "name": "Android Studio",
             "description": "The official IDE for Android development, built on IntelliJ IDEA.",
             "platforms": {
                 "win32": "Google.AndroidStudio",
                 "darwin": "android-studio"
-            }
-        },
-        {
-            "id": "sublime_text",
-            "name": "Sublime Text",
-            "description": "Sophisticated, ultra-fast text editor for code, markup, and prose.",
-            "platforms": {
-                "win32": "SublimeHQ.SublimeText.4",
-                "darwin": "sublime-text"
-            }
-        },
-        {
-            "id": "zed",
-            "name": "Zed",
-            "description": "High-performance, multi-player code editor from the creators of Atom.",
-            "platforms": {
-                "win32": "ZedIndustries.Zed",
-                "darwin": "zed"
-            }
-        },
-        {
-            "id": "neovim",
-            "name": "Neovim",
-            "description": "Hyperextensible Vim-based text editor focused on extensibility and usability.",
-            "platforms": {
-                "win32": "Neovim.Neovim",
-                "darwin": "neovim"
-            }
-        },
-        {
-            "id": "vim",
-            "name": "Vim",
-            "description": "The classic, highly configurable ubiquitous text editor for terminal users.",
-            "platforms": {
-                "win32": "Vim.Vim",
-                "darwin": "vim"
-            }
-        },
-        {
-            "id": "emacs",
-            "name": "Emacs",
-            "description": "An extensible, customizable, self-documenting real-time display editor.",
-            "platforms": {
-                "win32": "GNU.Emacs",
-                "darwin": "emacs"
             }
         },
         {
@@ -149,30 +23,12 @@
             }
         },
         {
-            "id": "codeblocks",
-            "name": "Code::Blocks",
-            "description": "Open-source, cross-platform C, C++ and Fortran IDE.",
+            "id": "blender",
+            "name": "Blender",
+            "description": "Open-source 3D creation suite for modeling, animation, and rendering.",
             "platforms": {
-                "win32": "CodeBlocks.CodeBlocks",
-                "darwin": "codeblocks"
-            }
-        },
-        {
-            "id": "nodejs",
-            "name": "Node.js (LTS)",
-            "description": "Asynchronous event-driven JavaScript runtime built on Chrome's V8 engine.",
-            "platforms": {
-                "win32": "OpenJS.NodeJS.LTS",
-                "darwin": "node"
-            }
-        },
-        {
-            "id": "deno",
-            "name": "Deno",
-            "description": "Secure, modern runtime for JavaScript and TypeScript by the creator of Node.",
-            "platforms": {
-                "win32": "DenoLand.Deno",
-                "darwin": "deno"
+                "win32": "BlenderFoundation.Blender",
+                "darwin": "blender"
             }
         },
         {
@@ -185,192 +41,12 @@
             }
         },
         {
-            "id": "python",
-            "name": "Python 3",
-            "description": "Interpreted, high-level, general-purpose programming language.",
+            "id": "burp_suite",
+            "name": "Burp Suite Community",
+            "description": "Essential tool for web application security testing and scanning.",
             "platforms": {
-                "win32": "Python.Python.3.12",
-                "darwin": "python"
-            }
-        },
-        {
-            "id": "openjdk",
-            "name": "OpenJDK",
-            "description": "Open-source implementation of the Java Platform, Standard Edition.",
-            "platforms": {
-                "win32": "EclipseAdoptium.Temurin.21.JDK",
-                "darwin": "openjdk"
-            }
-        },
-        {
-            "id": "graalvm",
-            "name": "GraalVM",
-            "description": "High-performance JDK that speeds up Java application execution.",
-            "platforms": {
-                "win32": "Oracle.GraalVM",
-                "darwin": "graalvm-jdk"
-            }
-        },
-        {
-            "id": "dotnet_sdk",
-            "name": ".NET SDK",
-            "description": "The software development kit for building .NET applications.",
-            "platforms": {
-                "win32": "Microsoft.DotNet.SDK.8",
-                "darwin": "dotnet-sdk"
-            }
-        },
-        {
-            "id": "ruby",
-            "name": "Ruby",
-            "description": "A dynamic, open-source programming language with a focus on simplicity.",
-            "platforms": {
-                "win32": "RubyInstallerTeam.Ruby",
-                "darwin": "ruby"
-            }
-        },
-        {
-            "id": "php",
-            "name": "PHP",
-            "description": "Popular general-purpose scripting language suited for web development.",
-            "platforms": {
-                "win32": "PHP.PHP",
-                "darwin": "php"
-            }
-        },
-        {
-            "id": "julia",
-            "name": "Julia",
-            "description": "High-level, high-performance language for numerical computing.",
-            "platforms": {
-                "win32": "JuliaLang.Julia",
-                "darwin": "julia"
-            }
-        },
-        {
-            "id": "r_lang",
-            "name": "R Programming",
-            "description": "Language and environment for statistical computing and graphics.",
-            "platforms": {
-                "win32": "RProject.R",
-                "darwin": "r"
-            }
-        },
-        {
-            "id": "mingw_winlibs",
-            "name": "MinGW (C/C++) - WinLibs",
-            "description": "Standalone GCC/LLVM toolchain for native Windows C/C++ development.",
-            "platforms": {
-                "win32": "BrechtSanders.WinLibs.POSIX.UCRT",
-                "darwin": "gcc"
-            }
-        },
-        {
-            "id": "llvm_clang",
-            "name": "LLVM / Clang",
-            "description": "Collection of modular and reusable compiler and toolchain technologies.",
-            "platforms": {
-                "win32": "LLVM.LLVM",
-                "darwin": "llvm"
-            }
-        },
-        {
-            "id": "oracle_jdk_25",
-            "name": "Oracle JDK 25",
-            "description": "The commercial Java SE Development Kit from Oracle.",
-            "platforms": {
-                "win32": "Oracle.JDK.25",
-                "darwin": "oracle-jdk"
-            }
-        },
-        {
-            "id": "rust",
-            "name": "Rust (Rustup)",
-            "description": "Toolchain installer for the language focused on safety, speed, and concurrency.",
-            "platforms": {
-                "win32": "Rustlang.Rustup",
-                "darwin": "rustup-init"
-            }
-        },
-        {
-            "id": "go",
-            "name": "Go",
-            "description": "Efficient, compiled language from Google for building reliable software.",
-            "platforms": {
-                "win32": "GoLang.Go",
-                "darwin": "go"
-            }
-        },
-        {
-            "id": "zig",
-            "name": "Zig",
-            "description": "General-purpose programming language and toolchain for robust software.",
-            "platforms": {
-                "win32": "zig.zig",
-                "darwin": "zig"
-            }
-        },
-        {
-            "id": "swift",
-            "name": "Swift",
-            "description": "Apple's powerful and intuitive language for building iOS and macOS apps.",
-            "platforms": {
-                "win32": "Swift.Toolchain",
-                "darwin": "swift"
-            }
-        },
-        {
-            "id": "nim",
-            "name": "Nim",
-            "description": "Compiled language that combines efficiency with an expressive syntax.",
-            "platforms": {
-                "win32": "Nim.Nim",
-                "darwin": "nim"
-            }
-        },
-        {
-            "id": "mysql_server",
-            "name": "MySQL Server",
-            "description": "The world's most popular open-source relational database management system.",
-            "platforms": {
-                "win32": "Oracle.MySQL",
-                "darwin": "mysql"
-            }
-        },
-        {
-            "id": "postgresql",
-            "name": "PostgreSQL",
-            "description": "The world's most advanced open-source relational database.",
-            "platforms": {
-                "win32": "PostgreSQL.PostgreSQL",
-                "darwin": "postgresql"
-            }
-        },
-        {
-            "id": "mariadb",
-            "name": "MariaDB",
-            "description": "Community-developed, commercially supported fork of MySQL.",
-            "platforms": {
-                "win32": "MariaDB.Server",
-                "darwin": "mariadb"
-            }
-        },
-        {
-            "id": "sqlite",
-            "name": "SQLite",
-            "description": "C-language library that implements a small, fast, self-contained SQL engine.",
-            "platforms": {
-                "win32": "SQLite.SQLite",
-                "darwin": "sqlite"
-            }
-        },
-        {
-            "id": "cockroachdb",
-            "name": "CockroachDB",
-            "description": "Distributed SQL database designed for cloud-native applications.",
-            "platforms": {
-                "win32": "CockroachLabs.CockroachDB",
-                "darwin": "cockroachdb"
+                "win32": "PortSwigger.BurpSuite.Community",
+                "darwin": "burp-suite"
             }
         },
         {
@@ -383,57 +59,48 @@
             }
         },
         {
+            "id": "charles_proxy",
+            "name": "Charles Proxy",
+            "description": "HTTP proxy / monitor for debugging web traffic between browser and internet.",
+            "platforms": {
+                "win32": "XK72.Charles",
+                "darwin": "charles"
+            }
+        },
+        {
+            "id": "clion",
+            "name": "CLion",
+            "description": "Cross-platform C and C++ IDE with native build system support.",
+            "platforms": {
+                "win32": "JetBrains.CLion",
+                "darwin": "clion"
+            }
+        },
+        {
+            "id": "cockroachdb",
+            "name": "CockroachDB",
+            "description": "Distributed SQL database designed for cloud-native applications.",
+            "platforms": {
+                "win32": "CockroachLabs.CockroachDB",
+                "darwin": "cockroachdb"
+            }
+        },
+        {
+            "id": "codeblocks",
+            "name": "Code::Blocks",
+            "description": "Open-source, cross-platform C, C++ and Fortran IDE.",
+            "platforms": {
+                "win32": "CodeBlocks.CodeBlocks",
+                "darwin": "codeblocks"
+            }
+        },
+        {
             "id": "couchdb",
             "name": "Apache CouchDB",
             "description": "Seamless multi-master sync database with JSON and HTTP API.",
             "platforms": {
                 "win32": "Apache.CouchDB",
                 "darwin": "couchdb"
-            }
-        },
-        {
-            "id": "neo4j",
-            "name": "Neo4j Desktop",
-            "description": "Comprehensive environment for graph database development and exploration.",
-            "platforms": {
-                "win32": "Neo4j.Neo4jDesktop",
-                "darwin": "neo4j"
-            }
-        },
-        {
-            "id": "elasticsearch",
-            "name": "Elasticsearch",
-            "description": "Distributed search and analytics engine for all types of data.",
-            "platforms": {
-                "win32": "Elastic.Elasticsearch",
-                "darwin": "elasticsearch"
-            }
-        },
-        {
-            "id": "mongodb_server",
-            "name": "MongoDB Server",
-            "description": "Modern, document-oriented NoSQL database for flexible data modeling.",
-            "platforms": {
-                "win32": "MongoDB.Server",
-                "darwin": "mongodb-community"
-            }
-        },
-        {
-            "id": "redis",
-            "name": "Redis",
-            "description": "In-memory data structure store used as a database, cache, and message broker.",
-            "platforms": {
-                "win32": "Redis.Redis",
-                "darwin": "redis"
-            }
-        },
-        {
-            "id": "dbeaver",
-            "name": "DBeaver Community",
-            "description": "Free multi-platform database tool for developers and DB administrators.",
-            "platforms": {
-                "win32": "dbeaver.dbeaver",
-                "darwin": "dbeaver-community"
             }
         },
         {
@@ -446,39 +113,21 @@
             }
         },
         {
-            "id": "mysql_workbench",
-            "name": "MySQL Workbench",
-            "description": "Visual tool for database architects, developers, and DBAs.",
+            "id": "dbeaver",
+            "name": "DBeaver Community",
+            "description": "Free multi-platform database tool for developers and DB administrators.",
             "platforms": {
-                "win32": "Oracle.MySQLWorkbench",
-                "darwin": "mysql-workbench"
+                "win32": "dbeaver.dbeaver",
+                "darwin": "dbeaver-community"
             }
         },
         {
-            "id": "pgadmin4",
-            "name": "pgAdmin 4",
-            "description": "The most popular Open Source administration and development platform for PostgreSQL.",
+            "id": "deno",
+            "name": "Deno",
+            "description": "Secure, modern runtime for JavaScript and TypeScript by the creator of Node.",
             "platforms": {
-                "win32": "PostgreSQL.pgAdmin",
-                "darwin": "pgadmin4"
-            }
-        },
-        {
-            "id": "mongodb_compass",
-            "name": "MongoDB Compass",
-            "description": "The GUI for MongoDB that lets you visualize and explore your data.",
-            "platforms": {
-                "win32": "MongoDB.Compass",
-                "darwin": "mongodb-compass"
-            }
-        },
-        {
-            "id": "tableplus",
-            "name": "TablePlus",
-            "description": "Modern, native tool for managing multiple relational and NoSQL databases.",
-            "platforms": {
-                "win32": "TablePlus.TablePlus",
-                "darwin": "tableplus"
+                "win32": "DenoLand.Deno",
+                "darwin": "deno"
             }
         },
         {
@@ -491,138 +140,48 @@
             }
         },
         {
-            "id": "podman_desktop",
-            "name": "Podman Desktop",
-            "description": "Open-source graphical interface for managing containers and pods.",
+            "id": "dotnet_sdk",
+            "name": ".NET SDK",
+            "description": "The software development kit for building .NET applications.",
             "platforms": {
-                "win32": "RedHat.PodmanDesktop",
-                "darwin": "podman-desktop"
+                "win32": "Microsoft.DotNet.SDK.8",
+                "darwin": "dotnet-sdk"
             }
         },
         {
-            "id": "rancher_desktop",
-            "name": "Rancher Desktop",
-            "description": "Container management and Kubernetes on the desktop.",
+            "id": "eclipse",
+            "name": "Eclipse IDE",
+            "description": "Classic, extensible IDE for Java, C++, and web development.",
             "platforms": {
-                "win32": "Rancher.RancherDesktop",
-                "darwin": "rancher-desktop"
+                "win32": "EclipseFoundation.EclipseIDE",
+                "darwin": "eclipse-jee"
             }
         },
         {
-            "id": "virtualbox",
-            "name": "VirtualBox",
-            "description": "Powerful x86 and AMD64/Intel64 virtualization product.",
+            "id": "elasticsearch",
+            "name": "Elasticsearch",
+            "description": "Distributed search and analytics engine for all types of data.",
             "platforms": {
-                "win32": "Oracle.VirtualBox",
-                "darwin": "virtualbox"
+                "win32": "Elastic.Elasticsearch",
+                "darwin": "elasticsearch"
             }
         },
         {
-            "id": "vagrant",
-            "name": "Vagrant",
-            "description": "Tool for building and managing virtual machine environments.",
+            "id": "emacs",
+            "name": "Emacs",
+            "description": "An extensible, customizable, self-documenting real-time display editor.",
             "platforms": {
-                "win32": "Hashicorp.Vagrant",
-                "darwin": "vagrant"
+                "win32": "GNU.Emacs",
+                "darwin": "emacs"
             }
         },
         {
-            "id": "qemu",
-            "name": "QEMU",
-            "description": "Generic and open-source machine emulator and virtualizer.",
+            "id": "epic_games",
+            "name": "Epic Games Launcher",
+            "description": "Launcher for Epic Games and the Unreal Engine development platform.",
             "platforms": {
-                "win32": "QEMU.QEMU",
-                "darwin": "qemu"
-            }
-        },
-        {
-            "id": "helm",
-            "name": "Helm",
-            "description": "The package manager for Kubernetes to manage complex applications.",
-            "platforms": {
-                "win32": "Helm.Helm",
-                "darwin": "helm"
-            }
-        },
-        {
-            "id": "kubectl",
-            "name": "kubectl",
-            "description": "Command-line tool for controlling Kubernetes clusters.",
-            "platforms": {
-                "win32": "Kubernetes.kubectl",
-                "darwin": "kubectl"
-            }
-        },
-        {
-            "id": "kustomize",
-            "name": "Kustomize",
-            "description": "Configuration management tool for Kubernetes native objects.",
-            "platforms": {
-                "win32": "Kubernetes.kustomize",
-                "darwin": "kustomize"
-            }
-        },
-        {
-            "id": "minikube",
-            "name": "Minikube",
-            "description": "Tool that runs a single-node Kubernetes cluster locally.",
-            "platforms": {
-                "win32": "Kubernetes.minikube",
-                "darwin": "minikube"
-            }
-        },
-        {
-            "id": "postman",
-            "name": "Postman",
-            "description": "API platform for developers to design, build, test, and iterate APIs.",
-            "platforms": {
-                "win32": "Postman.Postman",
-                "darwin": "postman"
-            }
-        },
-        {
-            "id": "insomnia",
-            "name": "Insomnia",
-            "description": "The open-source design editor and test player for REST, GraphQL, and gRPC.",
-            "platforms": {
-                "win32": "Kong.Insomnia",
-                "darwin": "insomnia"
-            }
-        },
-        {
-            "id": "wireshark",
-            "name": "Wireshark",
-            "description": "The world's foremost and widely-used network protocol analyzer.",
-            "platforms": {
-                "win32": "WiresharkFoundation.Wireshark",
-                "darwin": "wireshark"
-            }
-        },
-        {
-            "id": "hoppscotch",
-            "name": "Hoppscotch",
-            "description": "Lightweight, open-source API development ecosystem.",
-            "platforms": {
-                "win32": "Hoppscotch.Hoppscotch",
-                "darwin": "hoppscotch"
-            }
-        },
-        {
-            "id": "soapui",
-            "name": "SoapUI",
-            "description": "Testing tool for SOAP, REST, and other web services.",
-            "platforms": {
-                "win32": "SmartBear.SoapUI",
-                "darwin": "soapui"
-            }
-        },
-        {
-            "id": "charles_proxy",
-            "name": "Charles Proxy",
-            "description": "HTTP proxy / monitor for debugging web traffic between browser and internet.",
-            "platforms": {
-                "win32": "XK72.Charles",
-                "darwin": "charles"
+                "win32": "EpicGames.EpicGamesLauncher",
+                "darwin": "epic-games"
             }
         },
         {
@@ -635,39 +194,21 @@
             }
         },
         {
-            "id": "ngrok",
-            "name": "ngrok",
-            "description": "Simplest way to create a secure introspectable tunnel to your local server.",
+            "id": "gh_cli",
+            "name": "GitHub CLI",
+            "description": "GitHub's official command line tool for managing issues and PRs.",
             "platforms": {
-                "win32": "Ngrok.Ngrok",
-                "darwin": "ngrok"
+                "win32": "GitHub.cli",
+                "darwin": "gh"
             }
         },
         {
-            "id": "burp_suite",
-            "name": "Burp Suite Community",
-            "description": "Essential tool for web application security testing and scanning.",
+            "id": "gimp",
+            "name": "GIMP",
+            "description": "GNU Image Manipulation Program, a free alternative to Photoshop.",
             "platforms": {
-                "win32": "PortSwigger.BurpSuite.Community",
-                "darwin": "burp-suite"
-            }
-        },
-        {
-            "id": "zap",
-            "name": "OWASP ZAP",
-            "description": "The world's most widely used web app scanner, free and open source.",
-            "platforms": {
-                "win32": "OWASP.ZAP",
-                "darwin": "zaproxy"
-            }
-        },
-        {
-            "id": "nmap",
-            "name": "Nmap",
-            "description": "Free and open-source utility for network discovery and security auditing.",
-            "platforms": {
-                "win32": "Insecure.Nmap",
-                "darwin": "nmap"
+                "win32": "GIMP.GIMP",
+                "darwin": "gimp"
             }
         },
         {
@@ -689,66 +230,12 @@
             }
         },
         {
-            "id": "gh_cli",
-            "name": "GitHub CLI",
-            "description": "GitHub's official command line tool for managing issues and PRs.",
+            "id": "go",
+            "name": "Go",
+            "description": "Efficient, compiled language from Google for building reliable software.",
             "platforms": {
-                "win32": "GitHub.cli",
-                "darwin": "gh"
-            }
-        },
-        {
-            "id": "htop",
-            "name": "htop",
-            "description": "Interactive system-monitor process-viewer and manager.",
-            "platforms": {
-                "win32": "htop.htop",
-                "darwin": "htop"
-            }
-        },
-        {
-            "id": "blender",
-            "name": "Blender",
-            "description": "Open-source 3D creation suite for modeling, animation, and rendering.",
-            "platforms": {
-                "win32": "BlenderFoundation.Blender",
-                "darwin": "blender"
-            }
-        },
-        {
-            "id": "gimp",
-            "name": "GIMP",
-            "description": "GNU Image Manipulation Program, a free alternative to Photoshop.",
-            "platforms": {
-                "win32": "GIMP.GIMP",
-                "darwin": "gimp"
-            }
-        },
-        {
-            "id": "krita",
-            "name": "Krita",
-            "description": "Professional free and open-source painting program for digital artists.",
-            "platforms": {
-                "win32": "KDE.Krita",
-                "darwin": "krita"
-            }
-        },
-        {
-            "id": "inkscape",
-            "name": "Inkscape",
-            "description": "Professional vector graphics editor for creating SVG and vector art.",
-            "platforms": {
-                "win32": "Inkscape.Inkscape",
-                "darwin": "inkscape"
-            }
-        },
-        {
-            "id": "epic_games",
-            "name": "Epic Games Launcher",
-            "description": "Launcher for Epic Games and the Unreal Engine development platform.",
-            "platforms": {
-                "win32": "EpicGames.EpicGamesLauncher",
-                "darwin": "epic-games"
+                "win32": "GoLang.Go",
+                "darwin": "go"
             }
         },
         {
@@ -761,12 +248,525 @@
             }
         },
         {
+            "id": "goland",
+            "name": "GoLand",
+            "description": "Ergonomic IDE designed specifically for Go development.",
+            "platforms": {
+                "win32": "JetBrains.GoLand",
+                "darwin": "goland"
+            }
+        },
+        {
+            "id": "graalvm",
+            "name": "GraalVM",
+            "description": "High-performance JDK that speeds up Java application execution.",
+            "platforms": {
+                "win32": "Oracle.GraalVM",
+                "darwin": "graalvm-jdk"
+            }
+        },
+        {
+            "id": "helm",
+            "name": "Helm",
+            "description": "The package manager for Kubernetes to manage complex applications.",
+            "platforms": {
+                "win32": "Helm.Helm",
+                "darwin": "helm"
+            }
+        },
+        {
+            "id": "hoppscotch",
+            "name": "Hoppscotch",
+            "description": "Lightweight, open-source API development ecosystem.",
+            "platforms": {
+                "win32": "Hoppscotch.Hoppscotch",
+                "darwin": "hoppscotch"
+            }
+        },
+        {
+            "id": "htop",
+            "name": "htop",
+            "description": "Interactive system-monitor process-viewer and manager.",
+            "platforms": {
+                "win32": "htop.htop",
+                "darwin": "htop"
+            }
+        },
+        {
+            "id": "inkscape",
+            "name": "Inkscape",
+            "description": "Professional vector graphics editor for creating SVG and vector art.",
+            "platforms": {
+                "win32": "Inkscape.Inkscape",
+                "darwin": "inkscape"
+            }
+        },
+        {
+            "id": "insomnia",
+            "name": "Insomnia",
+            "description": "The open-source design editor and test player for REST, GraphQL, and gRPC.",
+            "platforms": {
+                "win32": "Kong.Insomnia",
+                "darwin": "insomnia"
+            }
+        },
+        {
+            "id": "intellij_ce",
+            "name": "IntelliJ IDEA Community",
+            "description": "Leading Java and Kotlin IDE for professional JVM development.",
+            "platforms": {
+                "win32": "JetBrains.IntelliJIDEA.Community",
+                "darwin": "intellij-idea-ce"
+            }
+        },
+        {
+            "id": "julia",
+            "name": "Julia",
+            "description": "High-level, high-performance language for numerical computing.",
+            "platforms": {
+                "win32": "JuliaLang.Julia",
+                "darwin": "julia"
+            }
+        },
+        {
+            "id": "krita",
+            "name": "Krita",
+            "description": "Professional free and open-source painting program for digital artists.",
+            "platforms": {
+                "win32": "KDE.Krita",
+                "darwin": "krita"
+            }
+        },
+        {
+            "id": "kubectl",
+            "name": "kubectl",
+            "description": "Command-line tool for controlling Kubernetes clusters.",
+            "platforms": {
+                "win32": "Kubernetes.kubectl",
+                "darwin": "kubectl"
+            }
+        },
+        {
+            "id": "kustomize",
+            "name": "Kustomize",
+            "description": "Configuration management tool for Kubernetes native objects.",
+            "platforms": {
+                "win32": "Kubernetes.kustomize",
+                "darwin": "kustomize"
+            }
+        },
+        {
+            "id": "llvm_clang",
+            "name": "LLVM / Clang",
+            "description": "Collection of modular and reusable compiler and toolchain technologies.",
+            "platforms": {
+                "win32": "LLVM.LLVM",
+                "darwin": "llvm"
+            }
+        },
+        {
+            "id": "mariadb",
+            "name": "MariaDB",
+            "description": "Community-developed, commercially supported fork of MySQL.",
+            "platforms": {
+                "win32": "MariaDB.Server",
+                "darwin": "mariadb"
+            }
+        },
+        {
+            "id": "mingw_winlibs",
+            "name": "MinGW (C/C++) - WinLibs",
+            "description": "Standalone GCC/LLVM toolchain for native Windows C/C++ development.",
+            "platforms": {
+                "win32": "BrechtSanders.WinLibs.POSIX.UCRT",
+                "darwin": "gcc"
+            }
+        },
+        {
+            "id": "minikube",
+            "name": "Minikube",
+            "description": "Tool that runs a single-node Kubernetes cluster locally.",
+            "platforms": {
+                "win32": "Kubernetes.minikube",
+                "darwin": "minikube"
+            }
+        },
+        {
+            "id": "mongodb_compass",
+            "name": "MongoDB Compass",
+            "description": "The GUI for MongoDB that lets you visualize and explore your data.",
+            "platforms": {
+                "win32": "MongoDB.Compass",
+                "darwin": "mongodb-compass"
+            }
+        },
+        {
+            "id": "mongodb_server",
+            "name": "MongoDB Server",
+            "description": "Modern, document-oriented NoSQL database for flexible data modeling.",
+            "platforms": {
+                "win32": "MongoDB.Server",
+                "darwin": "mongodb-community"
+            }
+        },
+        {
+            "id": "mysql_server",
+            "name": "MySQL Server",
+            "description": "The world's most popular open-source relational database management system.",
+            "platforms": {
+                "win32": "Oracle.MySQL",
+                "darwin": "mysql"
+            }
+        },
+        {
+            "id": "mysql_workbench",
+            "name": "MySQL Workbench",
+            "description": "Visual tool for database architects, developers, and DBAs.",
+            "platforms": {
+                "win32": "Oracle.MySQLWorkbench",
+                "darwin": "mysql-workbench"
+            }
+        },
+        {
+            "id": "neo4j",
+            "name": "Neo4j Desktop",
+            "description": "Comprehensive environment for graph database development and exploration.",
+            "platforms": {
+                "win32": "Neo4j.Neo4jDesktop",
+                "darwin": "neo4j"
+            }
+        },
+        {
+            "id": "neovim",
+            "name": "Neovim",
+            "description": "Hyperextensible Vim-based text editor focused on extensibility and usability.",
+            "platforms": {
+                "win32": "Neovim.Neovim",
+                "darwin": "neovim"
+            }
+        },
+        {
+            "id": "netbeans",
+            "name": "NetBeans",
+            "description": "Apache's Java-focused IDE with built-in support for Maven and Gradle.",
+            "platforms": {
+                "win32": "Apache.NetBeans",
+                "darwin": "netbeans"
+            }
+        },
+        {
+            "id": "ngrok",
+            "name": "ngrok",
+            "description": "Simplest way to create a secure introspectable tunnel to your local server.",
+            "platforms": {
+                "win32": "Ngrok.Ngrok",
+                "darwin": "ngrok"
+            }
+        },
+        {
+            "id": "nim",
+            "name": "Nim",
+            "description": "Compiled language that combines efficiency with an expressive syntax.",
+            "platforms": {
+                "win32": "Nim.Nim",
+                "darwin": "nim"
+            }
+        },
+        {
+            "id": "nmap",
+            "name": "Nmap",
+            "description": "Free and open-source utility for network discovery and security auditing.",
+            "platforms": {
+                "win32": "Insecure.Nmap",
+                "darwin": "nmap"
+            }
+        },
+        {
+            "id": "nodejs",
+            "name": "Node.js (LTS)",
+            "description": "Asynchronous event-driven JavaScript runtime built on Chrome's V8 engine.",
+            "platforms": {
+                "win32": "OpenJS.NodeJS.LTS",
+                "darwin": "node"
+            }
+        },
+        {
+            "id": "openjdk",
+            "name": "OpenJDK",
+            "description": "Open-source implementation of the Java Platform, Standard Edition.",
+            "platforms": {
+                "win32": "EclipseAdoptium.Temurin.21.JDK",
+                "darwin": "openjdk"
+            }
+        },
+        {
+            "id": "oracle_jdk_25",
+            "name": "Oracle JDK 25",
+            "description": "The commercial Java SE Development Kit from Oracle.",
+            "platforms": {
+                "win32": "Oracle.JDK.25",
+                "darwin": "oracle-jdk"
+            }
+        },
+        {
+            "id": "pgadmin4",
+            "name": "pgAdmin 4",
+            "description": "The most popular Open Source administration and development platform for PostgreSQL.",
+            "platforms": {
+                "win32": "PostgreSQL.pgAdmin",
+                "darwin": "pgadmin4"
+            }
+        },
+        {
+            "id": "php",
+            "name": "PHP",
+            "description": "Popular general-purpose scripting language suited for web development.",
+            "platforms": {
+                "win32": "PHP.PHP",
+                "darwin": "php"
+            }
+        },
+        {
+            "id": "podman_desktop",
+            "name": "Podman Desktop",
+            "description": "Open-source graphical interface for managing containers and pods.",
+            "platforms": {
+                "win32": "RedHat.PodmanDesktop",
+                "darwin": "podman-desktop"
+            }
+        },
+        {
+            "id": "postgresql",
+            "name": "PostgreSQL",
+            "description": "The world's most advanced open-source relational database.",
+            "platforms": {
+                "win32": "PostgreSQL.PostgreSQL",
+                "darwin": "postgresql"
+            }
+        },
+        {
+            "id": "postman",
+            "name": "Postman",
+            "description": "API platform for developers to design, build, test, and iterate APIs.",
+            "platforms": {
+                "win32": "Postman.Postman",
+                "darwin": "postman"
+            }
+        },
+        {
+            "id": "pycharm_ce",
+            "name": "PyCharm Community",
+            "description": "Intelligent Python IDE with smart code completion and refactoring tools.",
+            "platforms": {
+                "win32": "JetBrains.PyCharm.Community",
+                "darwin": "pycharm-ce"
+            }
+        },
+        {
+            "id": "python",
+            "name": "Python 3",
+            "description": "Interpreted, high-level, general-purpose programming language.",
+            "platforms": {
+                "win32": "Python.Python.3.12",
+                "darwin": "python"
+            }
+        },
+        {
+            "id": "qemu",
+            "name": "QEMU",
+            "description": "Generic and open-source machine emulator and virtualizer.",
+            "platforms": {
+                "win32": "QEMU.QEMU",
+                "darwin": "qemu"
+            }
+        },
+        {
+            "id": "rancher_desktop",
+            "name": "Rancher Desktop",
+            "description": "Container management and Kubernetes on the desktop.",
+            "platforms": {
+                "win32": "Rancher.RancherDesktop",
+                "darwin": "rancher-desktop"
+            }
+        },
+        {
+            "id": "redis",
+            "name": "Redis",
+            "description": "In-memory data structure store used as a database, cache, and message broker.",
+            "platforms": {
+                "win32": "Redis.Redis",
+                "darwin": "redis"
+            }
+        },
+        {
+            "id": "rider",
+            "name": "Rider",
+            "description": "Fast, cross-platform .NET IDE based on IntelliJ and ReSharper.",
+            "platforms": {
+                "win32": "JetBrains.Rider",
+                "darwin": "rider"
+            }
+        },
+        {
+            "id": "r_lang",
+            "name": "R Programming",
+            "description": "Language and environment for statistical computing and graphics.",
+            "platforms": {
+                "win32": "RProject.R",
+                "darwin": "r"
+            }
+        },
+        {
+            "id": "ruby",
+            "name": "Ruby",
+            "description": "A dynamic, open-source programming language with a focus on simplicity.",
+            "platforms": {
+                "win32": "RubyInstallerTeam.Ruby",
+                "darwin": "ruby"
+            }
+        },
+        {
+            "id": "rust",
+            "name": "Rust (Rustup)",
+            "description": "Toolchain installer for the language focused on safety, speed, and concurrency.",
+            "platforms": {
+                "win32": "Rustlang.Rustup",
+                "darwin": "rustup-init"
+            }
+        },
+        {
+            "id": "soapui",
+            "name": "SoapUI",
+            "description": "Testing tool for SOAP, REST, and other web services.",
+            "platforms": {
+                "win32": "SmartBear.SoapUI",
+                "darwin": "soapui"
+            }
+        },
+        {
+            "id": "sqlite",
+            "name": "SQLite",
+            "description": "C-language library that implements a small, fast, self-contained SQL engine.",
+            "platforms": {
+                "win32": "SQLite.SQLite",
+                "darwin": "sqlite"
+            }
+        },
+        {
+            "id": "sublime_text",
+            "name": "Sublime Text",
+            "description": "Sophisticated, ultra-fast text editor for code, markup, and prose.",
+            "platforms": {
+                "win32": "SublimeHQ.SublimeText.4",
+                "darwin": "sublime-text"
+            }
+        },
+        {
+            "id": "swift",
+            "name": "Swift",
+            "description": "Apple's powerful and intuitive language for building iOS and macOS apps.",
+            "platforms": {
+                "win32": "Swift.Toolchain",
+                "darwin": "swift"
+            }
+        },
+        {
+            "id": "tableplus",
+            "name": "TablePlus",
+            "description": "Modern, native tool for managing multiple relational and NoSQL databases.",
+            "platforms": {
+                "win32": "TablePlus.TablePlus",
+                "darwin": "tableplus"
+            }
+        },
+        {
             "id": "unity_hub",
             "name": "Unity Hub",
             "description": "Management tool for Unity projects and editor installations.",
             "platforms": {
                 "win32": "Unity.UnityHub",
                 "darwin": "unity-hub"
+            }
+        },
+        {
+            "id": "vagrant",
+            "name": "Vagrant",
+            "description": "Tool for building and managing virtual machine environments.",
+            "platforms": {
+                "win32": "Hashicorp.Vagrant",
+                "darwin": "vagrant"
+            }
+        },
+        {
+            "id": "vim",
+            "name": "Vim",
+            "description": "The classic, highly configurable ubiquitous text editor for terminal users.",
+            "platforms": {
+                "win32": "Vim.Vim",
+                "darwin": "vim"
+            }
+        },
+        {
+            "id": "virtualbox",
+            "name": "VirtualBox",
+            "description": "Powerful x86 and AMD64/Intel64 virtualization product.",
+            "platforms": {
+                "win32": "Oracle.VirtualBox",
+                "darwin": "virtualbox"
+            }
+        },
+        {
+            "id": "vscode",
+            "name": "Visual Studio Code",
+            "description": "Extensible, open-source code editor with powerful debugging and ecosystem support.",
+            "platforms": {
+                "win32": "Microsoft.VisualStudioCode",
+                "darwin": "visual-studio-code"
+            }
+        },
+        {
+            "id": "webstorm",
+            "name": "WebStorm",
+            "description": "Professional IDE for JavaScript and TypeScript development.",
+            "platforms": {
+                "win32": "JetBrains.WebStorm",
+                "darwin": "webstorm"
+            }
+        },
+        {
+            "id": "wireshark",
+            "name": "Wireshark",
+            "description": "The world's foremost and widely-used network protocol analyzer.",
+            "platforms": {
+                "win32": "WiresharkFoundation.Wireshark",
+                "darwin": "wireshark"
+            }
+        },
+        {
+            "id": "zap",
+            "name": "OWASP ZAP",
+            "description": "The world's most widely used web app scanner, free and open source.",
+            "platforms": {
+                "win32": "OWASP.ZAP",
+                "darwin": "zaproxy"
+            }
+        },
+        {
+            "id": "zed",
+            "name": "Zed",
+            "description": "High-performance, multi-player code editor from the creators of Atom.",
+            "platforms": {
+                "win32": "ZedIndustries.Zed",
+                "darwin": "zed"
+            }
+        },
+        {
+            "id": "zig",
+            "name": "Zig",
+            "description": "General-purpose programming language and toolchain for robust software.",
+            "platforms": {
+                "win32": "zig.zig",
+                "darwin": "zig"
             }
         }
     ]
