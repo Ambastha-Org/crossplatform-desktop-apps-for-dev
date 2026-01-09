@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 
 def slugify(name: str) -> str:
+    """Standardizes IDs to lowercase underscore format."""
     s = name.lower()
     s = re.sub(r"[^a-z0-9]+", "_", s)
     s = re.sub(r"_+", "_", s).strip("_")
@@ -26,6 +27,7 @@ def main():
     with open(entry_path, "r", encoding="utf-8") as f:
         incoming_data = json.load(f)
 
+    # Normalize incoming data from the gatekeeper
     if "win_id" in incoming_data or "brew_id" in incoming_data:
         platforms = {}
         if incoming_data.get("win_id"):
@@ -35,8 +37,7 @@ def main():
 
         entry = {
             "name": incoming_data.get("name") or "New Tool",
-            "description": incoming_data.get("description")
-                or "Added via automated tool request 🤖",
+            "description": incoming_data.get("description") or "Added via automated tool request 🤖",
             "platforms": platforms,
         }
     else:
@@ -62,49 +63,43 @@ def main():
             registry = json.load(f)
 
     tools = registry.get("os_tools", [])
-
+    
+    # Check for platform ID conflicts before doing anything
     for t in tools:
         if t.get("id") == tool_id:
             continue
         for p_key, p_val in new_platforms.items():
             if p_val and t.get("platforms", {}).get(p_key) == p_val:
-                die(
-                    f"❌ ERROR: Platform ID '{p_val}' already assigned to '{t.get('id')}'"
-                )
+                die(f"❌ ERROR: Platform ID '{p_val}' is already claimed by '{t.get('id')}'")
 
     found = False
-
-    existing_change = registry.get("metadata", {}).get("change", "patch")
-    change_type = existing_change
+    change_type = "patch"
 
     for t in tools:
         if t.get("id") == tool_id:
-            print(f"🔄 Updating existing tool: {tool_id}")
-
+            print(f"🔄 Ambastha Update: {tool_id}")
             t["name"] = tool_name
-
-            if description and "automated tool request" not in t.get(
-                "description", ""
-            ).lower():
+            
+            # Smart Description: Only overwrite if the existing one is the generic bot message
+            current_desc = t.get("description", "").lower()
+            if "automated tool request" in current_desc or not current_desc:
                 t["description"] = description
-
+            
             t.setdefault("platforms", {}).update(new_platforms)
-
             found = True
             break
 
     if not found:
-        tools.append(
-            {
-                "id": tool_id,
-                "name": tool_name,
-                "description": description,
-                "platforms": new_platforms,
-            }
-        )
+        tools.append({
+            "id": tool_id,
+            "name": tool_name,
+            "description": description,
+            "platforms": new_platforms,
+        })
         change_type = "minor"
-        print(f"✨ Added new tool: {tool_id}")
+        print(f"✨ Ambastha New Entry: {tool_id}")
 
+    # Update Registry Metadata
     registry["os_tools"] = tools
     registry.setdefault("metadata", {})
     registry["metadata"]["updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -112,8 +107,6 @@ def main():
 
     with open(os_tools_path, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=4, ensure_ascii=False)
-
-    print(f"📦 Registry change type: {change_type}")
 
 if __name__ == "__main__":
     main()

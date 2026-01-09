@@ -1,0 +1,28 @@
+name: "🔁 Registry Recovery"
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Retry Rate-Limited Issues"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: '⏳ rate-limited',
+              state: 'open'
+            });
+            for (const issue of issues.data) {
+              await github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'issue-gatekeeper.yml',
+                ref: 'main'
+              });
+            }

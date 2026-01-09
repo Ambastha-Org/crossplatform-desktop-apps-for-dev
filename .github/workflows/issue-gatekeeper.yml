@@ -3,17 +3,6 @@ name: "🛡️ Issue Gatekeeper"
 on:
   issues:
     types: [opened, edited, reopened]
-  workflow_dispatch:
-    inputs:
-      tool_name:
-        description: "📛 Tool Name"
-        required: true
-      winget_id:
-        description: "🪟 WinGet ID"
-        required: true
-      brew_id:
-        description: "🍎 Homebrew ID"
-        required: true
 
 permissions:
   contents: write
@@ -21,158 +10,39 @@ permissions:
   pull-requests: write
 
 jobs:
-  setup:
-    name: "🧠 Unified Parsing"
+  gatekeeper:
     runs-on: ubuntu-latest
-    outputs:
-      win_id: ${{ github.event.inputs.winget_id || steps.parse.outputs.win_id }}
-      brew_id: ${{ github.event.inputs.brew_id || steps.parse.outputs.brew_id }}
-      tool_name: ${{ github.event.inputs.tool_name || steps.parse.outputs.tool_name }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Ensure Labels Exist
-        if: github.event_name == 'issues'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const labels = ['🚫 duplicate','✅ auto-verified','🔥 confirmed-broken','🧪 needs-verification','✨ new-tool','🚨 bug','⚡ priority'];
-            for (const name of labels) {
-              try {
-                await github.rest.issues.getLabel({ owner, repo, name });
-              } catch (e) {
-                await github.rest.issues.createLabel({ owner, repo, name, color: 'ededed' });
-              }
-            }
-
-      - name: Parse YAML & Check Duplicates
-        id: parse
-        if: github.event_name == 'issues'
+      - name: "Initial Parse"
         uses: actions/github-script@v7
         with:
           script: |
             const script = require('./scripts/issue_aggregator.js');
             await script({github, context, core});
-            core.setOutput('win_id', process.env.REQ_WIN_ID || '');
-            core.setOutput('brew_id', process.env.REQ_BREW_ID || '');
-            core.setOutput('tool_name', process.env.TOOL_NAME || '');
 
-  verify:
-    name: "🔍 Verification"
-    needs: setup
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: windows-latest
-            platform: winget
-            script: "scripts/verify_winget.ps1"
-          - os: macos-latest
-            platform: homebrew
-            script: "scripts/verify_brew.sh"
-    runs-on: ${{ matrix.os }}
-    env:
-      REQ_WIN_ID: ${{ needs.setup.outputs.win_id }}
-      REQ_BREW_ID: ${{ needs.setup.outputs.brew_id }}
-    outputs:
-      win_data: ${{ steps.capture.outputs.win_data }}
-      brew_data: ${{ steps.capture.outputs.brew_data }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run Verification (Windows)
-        if: matrix.os == 'windows-latest'
-        id: run_script_win
-        shell: pwsh
+      - name: "Verify IDs"
         run: |
-          Write-Host "Running ${{ matrix.script }} on Windows"
-          & ./${{ matrix.script }} | Out-File -FilePath output.txt -Encoding utf8
-          Get-Content output.txt
+          # WinGet Check
+          WIN_RES=$(curl -s "https://api.github.com/search/code?q=filename:${{ env.REQ_WIN_ID }}+repo:microsoft/winget-pkgs" | jq '.total_count // 0')
+          if [ "$WIN_RES" -gt 0 ]; then echo "WIN_DATA={\"found\":true}" >> $GITHUB_ENV; fi
 
-      - name: Run Verification (macOS)
-        if: matrix.os == 'macos-latest'
-        id: run_script_mac
-        shell: bash
-        run: |
-          echo "Running ${{ matrix.script }} on macOS"
-          chmod +x ./${{ matrix.script }}
-          ./${{ matrix.script }} > output.txt
-          cat output.txt
+          # Brew Check
+          BREW_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://formulae.brew.sh/api/formula/${{ env.REQ_BREW_ID }}.json)
+          if [ "$BREW_CODE" == "200" ]; then echo "BREW_DATA={\"found\":true}" >> $GITHUB_ENV; fi
 
-      - name: Capture JSON Result
-        id: capture
-        shell: bash
-        run: |
-          DATA=$(grep "RESULT_JSON=" output.txt | sed 's/RESULT_JSON=//')
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            echo "win_data=$DATA" >> $GITHUB_OUTPUT
-          else
-            echo "brew_data=$DATA" >> $GITHUB_OUTPUT
-          fi
-
-  aggregate:
-    name: "🔗 Process & Respond"
-    needs: [setup, verify]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Finalize Issue Status
-        if: github.event_name == 'issues'
-        uses: actions/github-script@v7
+      - name: "Finalize & PR Signal"
         env:
-          WIN_DATA: ${{ needs.verify.outputs.win_data }}
-          BREW_DATA: ${{ needs.verify.outputs.brew_data }}
-        with:
-          script: |
-            const script = require('./scripts/issue_aggregator.js');
-            await script({github, context, core});
+          WIN_DATA: ${{ env.WIN_DATA }}
+          BREW_DATA: ${{ env.BREW_DATA }}
+        run: node -e "require('./scripts/issue_aggregator.js')({github, context, core})"
 
-      - name: "🚀 Run PR Logic (LOCAL TEST)"
-        env:
-          W_DATA: ${{ needs.verify.outputs.win_data }}
-          B_DATA: ${{ needs.verify.outputs.brew_data }}
-        run: |
-          sanitize_json() {
-            local input="$1"
-
-            if echo "$input" | jq -e . >/dev/null 2>&1; then
-              echo "$input"
-            else
-              echo '{"found":false}'
-            fi
-          }
-
-          W_DATA=$(sanitize_json "$W_DATA")
-          B_DATA=$(sanitize_json "$B_DATA")
-
-          WIN_SUG=$(echo "$W_DATA" | jq -r '.suggestion // ""')
-          BREW_SUG=$(echo "$B_DATA" | jq -r '.suggestion // ""')
-
-          WIN_SUG=$(echo "$W_DATA" | jq -r '.suggestion // ""')
-          BREW_SUG=$(echo "$B_DATA" | jq -r '.suggestion // ""')
-
-          echo "{\"win_id\":\"$WIN_SUG\",\"brew_id\":\"$BREW_SUG\",\"name\":\"${{ needs.setup.outputs.tool_name }}\"}" > /tmp/entry.json
-
-          python3 scripts/add_tool_entry.py /tmp/entry.json
-          python3 scripts/reformat_json.py
-
-      - name: "📤 Create or Update PR"
-        if: |
-          success() && 
-          (contains(needs.verify.outputs.win_data, '"found": true') || 
-           contains(needs.verify.outputs.brew_data, '"found": true'))
+      - name: "🚀 Create PR"
+        if: hashFiles('/tmp/apply.json') != ''
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           branch: "automated-tool-updates"
-          commit-message: "feat: update os_tools.json via Registry-Bot 🤖"
-          title: "🚀 [Automated] New Tool Proposals"
-          body: "Verified tool requests processing. Automated sorting applied."
-          delete-branch: false
+          title: "🚀 [Ambastha] Add ${{ env.TOOL_NAME }}"
+          commit-message: "feat: automated registry update for ${{ env.TOOL_NAME }}"
+          body: "Verified by Ambastha-Org Gatekeeper."
