@@ -1,7 +1,7 @@
 # 🌍 Universal Developer Registry
 
-[![Registry Maintenance](https://github.com/PolyMeshStudios/Universal-Dev-Registry/actions/workflows/maintain_registry.yml/badge.svg)](https://github.com/PolyMeshStudios/Universal-Dev-Registry/actions/workflows/maintain_registry.yml)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Registry Maintenance](https://github.com/Ambastha-Org/crossplatform-desktop-apps-for-dev/actions/workflows/maintain_registry.yml/badge.svg)](https://github.com/Ambastha-Org/crossplatform-desktop-apps-for-dev/actions/workflows/maintain_registry.yml)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 The **Universal Developer Registry** is a cross-platform mapping of developer-focused desktop tools. It serves as the primary "Source of Truth" for bridging the gap between Windows (**WinGet**) and macOS (**Homebrew**).
 
@@ -47,12 +47,28 @@ Is a tool no longer installing? Use this to report a deprecated or changed ID.
 ---
 
 ## 📄 License
-Licensed under the **Apache License, Version 2.0** (the "License").
-You may obtain a copy of the License at:
 
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+This data registry is owned by **Ambastha** and is licensed under the  
+**Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)**.
 
 ---
-*Maintained by PolyMesh Studios*
+
+## 📜 Terms of Use
+
+- **Attribution**  
+  You must give appropriate credit to **Ambastha** and provide a link to this repository.
+
+- **Non-Commercial**  
+  You may not use this material for commercial purposes, including monetary compensation or commercial advantage.
+
+- **No Additional Restrictions**  
+  You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+---
+
+🔗 **Full License Text:**  
+http://creativecommons.org/licenses/by-nc/4.0/
+
+---
+
+Maintained by **Ambastha-Org**
