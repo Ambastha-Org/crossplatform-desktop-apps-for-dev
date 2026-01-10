@@ -1,4 +1,10 @@
 {
+    "header": {
+        "project": "Universal Dev Registry",
+        "owner": "Ambastha / Ambastha-Org",
+        "license": "CC BY-NC 4.0 (Attribution-NonCommercial)",
+        "notice": "Copyright (c) 2025-2026. Commercial use or unauthorized cloning of this registry architecture is strictly prohibited."
+    },
     "metadata": {
         "version": "1.0.0",
         "updated": "2026-01-01 14:30:15"
