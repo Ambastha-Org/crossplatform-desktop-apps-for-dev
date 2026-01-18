@@ -13,36 +13,69 @@ jobs:
   gatekeeper:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: "🚚 Checkout Repository"
+        uses: actions/checkout@v4
 
-      - name: "Initial Parse"
+      - name: "📑 Initial Parse"
         uses: actions/github-script@v7
         with:
           script: |
             const script = require('./scripts/issue_aggregator.js');
             await script({github, context, core});
 
-      - name: "Verify IDs"
+      - name: "🔍 Verify IDs (WinGet & Brew)"
         run: |
-          # WinGet Check
-          WIN_RES=$(curl -s "https://api.github.com/search/code?q=filename:${{ env.REQ_WIN_ID }}+repo:microsoft/winget-pkgs" | jq '.total_count // 0')
-          if [ "$WIN_RES" -gt 0 ]; then echo "WIN_DATA={\"found\":true}" >> $GITHUB_ENV; fi
+          # 🪟 WinGet Path Verification
+          # Convert "Publisher.Tool" to "manifests/p/Publisher/Tool"
+          ID="${{ env.REQ_WIN_ID }}"
+          if [ ! -z "$ID" ]; then
+            FIRST_LETTER=$(echo "${ID:0:1}" | tr '[:upper:]' '[:lower:]')
+            PART_PATH=$(echo "$ID" | tr '.' '/')
+            WIN_URL="https://api.github.com/repos/microsoft/winget-pkgs/contents/manifests/$FIRST_LETTER/$PART_PATH"
+            
+            # Using GITHUB_TOKEN to avoid rate limits
+            WIN_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "$WIN_URL")
+            
+            if [ "$WIN_STATUS" == "200" ]; then 
+              echo "WIN_DATA={\"found\":true}" >> $GITHUB_ENV
+            fi
+          fi
 
-          # Brew Check
-          BREW_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://formulae.brew.sh/api/formula/${{ env.REQ_BREW_ID }}.json)
-          if [ "$BREW_CODE" == "200" ]; then echo "BREW_DATA={\"found\":true}" >> $GITHUB_ENV; fi
+          # 🍎 Brew Formula/Cask Verification
+          BREW_ID="${{ env.REQ_BREW_ID }}"
+          if [ ! -z "$BREW_ID" ]; then
+            B_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://formulae.brew.sh/api/formula/${BREW_ID}.json")
+            C_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://formulae.brew.sh/api/cask/${BREW_ID}.json")
+            
+            if [ "$B_CODE" == "200" ] || [ "$C_CODE" == "200" ]; then 
+              echo "BREW_DATA={\"found\":true}" >> $GITHUB_ENV
+            fi
+          fi
 
-      - name: "Finalize & PR Signal"
+      - name: "💾 Finalize & Update Registry"
         env:
           WIN_DATA: ${{ env.WIN_DATA }}
           BREW_DATA: ${{ env.BREW_DATA }}
-        run: node -e "require('./scripts/issue_aggregator.js')({github, context, core})"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./scripts/issue_aggregator.js');
+            await script({github, context, core});
 
-      - name: "🚀 Create PR"
-        if: hashFiles('/tmp/apply.json') != ''
+      - name: "🚀 Create Pull Request"
+        if: hashFiles('apply_signal.json') != ''
         uses: peter-evans/create-pull-request@v5
         with:
+          add-paths: os_tools.json
           branch: "automated-tool-updates"
-          title: "🚀 [Ambastha] Add ${{ env.TOOL_NAME }}"
+          title: "🚀 [tools] Add ${{ env.TOOL_NAME }}"
           commit-message: "feat: automated registry update for ${{ env.TOOL_NAME }}"
-          body: "Verified by Ambastha-Org Gatekeeper."
+          body: |
+            ### 🤖 Automated Registry Update
+            - **Tool:** ${{ env.TOOL_NAME }}
+            - **WinGet ID:** `${{ env.REQ_WIN_ID }}`
+            - **Brew ID:** `${{ env.REQ_BREW_ID }}`
+
+            Verified by Ambastha-Org Gatekeeper.
