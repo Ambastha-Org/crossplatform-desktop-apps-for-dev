@@ -7,7 +7,7 @@
     },
     "metadata": {
         "version": "1.0.0",
-        "updated": "2026-01-01 14:30:15"
+        "updated": "2026-01-18 17:26:00"
     },
     "os_tools": [
         {
@@ -773,6 +773,15 @@
             "platforms": {
                 "win32": "zig.zig",
                 "darwin": "zig"
+            }
+        },
+        {
+            "id": "gitkraken",
+            "name": "GitKraken",
+            "description": "Visual Git history, rebasing, cherry-picks.",
+            "platforms": {
+                "win32": "Axosoft.GitKraken",
+                "darwin": "gitkraken"
             }
         }
     ]
