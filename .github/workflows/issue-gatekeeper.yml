@@ -16,6 +16,11 @@ jobs:
       - name: "🚚 Checkout Repository"
         uses: actions/checkout@v4
 
+      - name: "🐍 Set up Python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
       - name: "📑 Initial Parse"
         uses: actions/github-script@v7
         with:
@@ -64,6 +69,11 @@ jobs:
             const script = require('./scripts/issue_aggregator.js');
             await script({github, context, core});
 
+      - name: "🧪 Apply Sorting & SemVer"
+        if: hashFiles('apply_signal.json') != ''
+        run: |
+          python scripts/reformat_json.py
+
       - name: "🚀 Create Pull Request"
         if: hashFiles('apply_signal.json') != ''
         uses: peter-evans/create-pull-request@v5
@@ -75,7 +85,8 @@ jobs:
           body: |
             ### 🤖 Automated Registry Update
             - **Tool:** ${{ env.TOOL_NAME }}
-            - **WinGet ID:** `${{ env.REQ_WIN_ID }}`
-            - **Brew ID:** `${{ env.REQ_BREW_ID }}`
+            - **Status:** Verified on WinGet & Brew ✅
+            - **Version:** Auto-bumped based on change type.
+            - **Registry:** Sorted alphabetically by ID.
 
             Verified by Ambastha-Org Gatekeeper.

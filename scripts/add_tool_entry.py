@@ -27,7 +27,6 @@ def main():
     with open(entry_path, "r", encoding="utf-8") as f:
         incoming_data = json.load(f)
 
-    # Normalize incoming data from the gatekeeper
     if "win_id" in incoming_data or "brew_id" in incoming_data:
         platforms = {}
         if incoming_data.get("win_id"):
@@ -64,7 +63,6 @@ def main():
 
     tools = registry.get("os_tools", [])
     
-    # Check for platform ID conflicts before doing anything
     for t in tools:
         if t.get("id") == tool_id:
             continue
@@ -73,17 +71,22 @@ def main():
                 die(f"❌ ERROR: Platform ID '{p_val}' is already claimed by '{t.get('id')}'")
 
     found = False
-    change_type = "patch"
+    change_type = None
 
     for t in tools:
         if t.get("id") == tool_id:
             print(f"🔄 Ambastha Update: {tool_id}")
+            
+            if t.get("name") != tool_name or t.get("platforms") != new_platforms:
+                change_type = "patch"
+
             t["name"] = tool_name
             
-            # Smart Description: Only overwrite if the existing one is the generic bot message
             current_desc = t.get("description", "").lower()
             if "automated tool request" in current_desc or not current_desc:
-                t["description"] = description
+                if t.get("description") != description:
+                    t["description"] = description
+                    change_type = "patch"
             
             t.setdefault("platforms", {}).update(new_platforms)
             found = True
@@ -96,17 +99,17 @@ def main():
             "description": description,
             "platforms": new_platforms,
         })
-        change_type = "minor"
+        change_type = "minor"  
         print(f"✨ Ambastha New Entry: {tool_id}")
 
-    # Update Registry Metadata
+    tools.sort(key=lambda x: re.sub(r"[^a-z0-9]", "", x.get("id", "").lower()))
+
     registry["os_tools"] = tools
     registry.setdefault("metadata", {})
     registry["metadata"]["updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    registry["metadata"]["change"] = change_type
+    
+    if change_type:
+        registry["metadata"]["change"] = change_type
 
     with open(os_tools_path, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=4, ensure_ascii=False)
-
-if __name__ == "__main__":
-    main()
