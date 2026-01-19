@@ -3,6 +3,11 @@ name: "🛡️ Issue Gatekeeper"
 on:
   issues:
     types: [opened, edited, reopened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "The issue number to process (used by Recovery)"
+        required: false
 
 permissions:
   contents: write
@@ -28,36 +33,15 @@ jobs:
             const script = require('./scripts/issue_aggregator.js');
             await script({github, context, core});
 
-      - name: "🔍 Verify IDs (WinGet & Brew)"
+      - name: "🔍 Remote ID Verification"
+        shell: bash
         run: |
-          # 🪟 WinGet Path Verification
-          # Convert "Publisher.Tool" to "manifests/p/Publisher/Tool"
-          ID="${{ env.REQ_WIN_ID }}"
-          if [ ! -z "$ID" ]; then
-            FIRST_LETTER=$(echo "${ID:0:1}" | tr '[:upper:]' '[:lower:]')
-            PART_PATH=$(echo "$ID" | tr '.' '/')
-            WIN_URL="https://api.github.com/repos/microsoft/winget-pkgs/contents/manifests/$FIRST_LETTER/$PART_PATH"
-            
-            # Using GITHUB_TOKEN to avoid rate limits
-            WIN_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              "$WIN_URL")
-            
-            if [ "$WIN_STATUS" == "200" ]; then 
-              echo "WIN_DATA={\"found\":true}" >> $GITHUB_ENV
-            fi
-          fi
-
-          # 🍎 Brew Formula/Cask Verification
-          BREW_ID="${{ env.REQ_BREW_ID }}"
-          if [ ! -z "$BREW_ID" ]; then
-            B_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://formulae.brew.sh/api/formula/${BREW_ID}.json")
-            C_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://formulae.brew.sh/api/cask/${BREW_ID}.json")
-            
-            if [ "$B_CODE" == "200" ] || [ "$C_CODE" == "200" ]; then 
-              echo "BREW_DATA={\"found\":true}" >> $GITHUB_ENV
-            fi
-          fi
+          chmod +x ./scripts/remote_verify.sh
+          ./scripts/remote_verify.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQ_WIN_ID: ${{ env.REQ_WIN_ID }}
+          REQ_BREW_ID: ${{ env.REQ_BREW_ID }}
 
       - name: "💾 Finalize & Update Registry"
         env:
@@ -69,24 +53,35 @@ jobs:
             const script = require('./scripts/issue_aggregator.js');
             await script({github, context, core});
 
-      - name: "🧪 Apply Sorting & SemVer"
+      - name: "🧪 Apply Sorting, SemVer & README Update"
         if: hashFiles('apply_signal.json') != ''
         run: |
           python scripts/reformat_json.py
 
-      - name: "🚀 Create Pull Request"
+      - name: "🚀 Create/Update Pull Request"
         if: hashFiles('apply_signal.json') != ''
+        id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
-          add-paths: os_tools.json
+          add-paths: |
+            os_tools.json
+            README.md
           branch: "automated-tool-updates"
-          title: "🚀 [tools] Add ${{ env.TOOL_NAME }}"
-          commit-message: "feat: automated registry update for ${{ env.TOOL_NAME }}"
+          title: "🚀 [Registry Update] Batch Tool Additions & Maintenance"
+          commit-message: "chore: update registry & readme to v$(jq -r '.metadata.version' os_tools.json)"
           body: |
             ### 🤖 Automated Registry Update
-            - **Tool:** ${{ env.TOOL_NAME }}
-            - **Status:** Verified on WinGet & Brew ✅
-            - **Version:** Auto-bumped based on change type.
-            - **Registry:** Sorted alphabetically by ID.
+            Triggered by Issue #${{ github.event.inputs.issue_number || github.event.issue.number }}.
 
-            Verified by Ambastha-Org Gatekeeper.
+            - **Action:** ${{ env.CHANGE_TYPE == 'minor' && 'New Tool Addition' || 'Tool Fix/Update' }}
+            - **Tool:** ${{ env.TOOL_NAME }}
+            - **Status:** Verified ✅
+            - **Version:** v$(jq -r '.metadata.version' os_tools.json)
+
+      - name: "🔗 Comment PR Link on Issue"
+        if: steps.cpr.outputs.pull-request-number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = "${{ steps.cpr.outputs.pull-request-number }}";
+            await require('./scripts/comment_pr_link.js')({github, context, prNumber});

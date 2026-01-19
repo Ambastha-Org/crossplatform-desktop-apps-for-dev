@@ -1,27 +1,28 @@
-name: "➕ Add a New Tool"
-description: "Suggest a cross-platform tool for the universal developer registry"
-title: "🚀 [ADD]: <Tool Name>"
-labels: ["✨ new-tool", "🧪 needs-verification"]
+name: "🚨 Report a Broken Tool"
+description: "Notify us if a WinGet or Brew ID is incorrect or the tool is broken"
+title: "🐞 [FIX]: <Tool Name>"
+labels: ["🚨 bug", "🧪 needs-verification"]
 body:
   - type: markdown
     attributes:
       value: |
-        ### 🌟 New Tool Proposal
-        Thank you for contributing! Our bot will verify these IDs and check for duplicates.
+        ### 🔧 Tool Maintenance Report
+        Use this form to report issues with existing registry entries. 
+        **Note:** If you are changing an ID, our bot will verify the new ID.
 
   - type: input
     id: tool_name
     attributes:
       label: "📛 Tool Name"
-      placeholder: "e.g., MongoDB Compass"
+      placeholder: "The name as it appears in the registry"
     validations:
       required: true
 
   - type: textarea
-    id: description
+    id: issue_details
     attributes:
-      label: "📝 Short Description"
-      placeholder: "Briefly explain what this tool does."
+      label: "📝 What is broken?"
+      placeholder: "e.g., The WinGet ID has changed to Microsoft.VisualStudioCode"
     validations:
       required: true
 
@@ -29,29 +30,24 @@ body:
     id: winget_id
     attributes:
       label: "🪟 WinGet ID (Windows)"
-      placeholder: "e.g., MongoDB.Compass.Full"
-    validations:
-      required: true
+      placeholder: "Enter the correct WinGet ID"
 
   - type: input
     id: brew_id
     attributes:
       label: "🍎 Homebrew ID (macOS/Darwin)"
-      placeholder: "e.g., mongodb-compass"
-    validations:
-      required: true
+      placeholder: "Enter the correct Homebrew ID"
 
   - type: markdown
     attributes:
       value: |
         ---
         ### 🤖 Internal Registry Data (Do Not Edit)
-        *The bot will automatically extract data from the fields above.*
 
   - type: checkboxes
     id: verification
     attributes:
       label: "✅ Verification Step"
       options:
-        - label: "I have verified these IDs exist."
+        - label: "I have checked that these IDs are currently valid."
           required: true
