@@ -1,14 +1,14 @@
-name: "🚨 Report a Broken Tool"
-description: "Notify us if a WinGet or Brew ID is incorrect or the tool is broken"
-title: "🐞 [FIX]: <Tool Name>"
-labels: ["🚨 bug", "🧪 needs-verification"]
+name: "✨ Add a New Tool"
+description: "Request to add a new WinGet or Homebrew tool to the Universal Registry"
+title: "🚀 [ADD]: <Tool Name>"
+labels: ["✨ enhancement", "🧪 needs-verification"]
 body:
   - type: markdown
     attributes:
       value: |
-        ### 🔧 Tool Maintenance Report
-        Use this form to report issues with existing registry entries. 
-        **Note:** If you are changing an ID, our bot will verify the new ID.
+        ### 🆕 New Tool Request
+        Use this form to suggest a new tool for the registry.
+        Our **Ambastha-Bot** will verify the WinGet/Brew IDs automatically.
 
   - type: input
     id: tool_name
