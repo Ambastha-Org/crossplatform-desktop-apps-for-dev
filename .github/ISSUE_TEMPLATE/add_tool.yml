@@ -21,8 +21,8 @@ body:
   - type: textarea
     id: issue_details
     attributes:
-      label: "📝 What is broken?"
-      placeholder: "e.g., The WinGet ID has changed to Microsoft.VisualStudioCode"
+      label: "📝 Give the description of the tool"
+      placeholder: "e.g., what is the tool use for or how it helps the devs"
     validations:
       required: true
 
