@@ -538,20 +538,20 @@
             }
         },
         {
-            "id": "neo-htop",
-            "name": "NeoHtop",
-            "description": "A cross-platform terminal-based system monitor, aiming to be a faster and more modern version of htop.",
-            "platforms": {
-                "win32": "abdenasser.NeoHtop"
-            }
-        },
-        {
             "id": "neo4j",
             "name": "Neo4j Desktop",
             "description": "Comprehensive environment for graph database development and exploration.",
             "platforms": {
                 "win32": "Neo4j.Neo4jDesktop",
                 "darwin": "neo4j"
+            }
+        },
+        {
+            "id": "neo-htop",
+            "name": "NeoHtop",
+            "description": "A cross-platform terminal-based system monitor, aiming to be a faster and more modern version of htop.",
+            "platforms": {
+                "win32": "abdenasser.NeoHtop"
             }
         },
         {
@@ -636,21 +636,21 @@
             }
         },
         {
-            "id": "oracle_jdk_25",
-            "name": "Oracle JDK 25",
-            "description": "The commercial Java SE Development Kit from Oracle.",
-            "platforms": {
-                "win32": "Oracle.JDK.25",
-                "darwin": "oracle-jdk"
-            }
-        },
-        {
             "id": "opentofu",
             "name": "OpenTofu",
             "description": "The open-source infrastructure as code tool, a community-driven fork of Terraform.",
             "platforms": {
                 "win32": "OpenTofu.Tofu",
                 "darwin": "opentofu"
+            }
+        },
+        {
+            "id": "oracle_jdk_25",
+            "name": "Oracle JDK 25",
+            "description": "The commercial Java SE Development Kit from Oracle.",
+            "platforms": {
+                "win32": "Oracle.JDK.25",
+                "darwin": "oracle-jdk"
             }
         },
         {
