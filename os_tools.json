@@ -7,7 +7,7 @@
     },
     "metadata": {
         "version": "1.1.0",
-        "updated": "2026-02-15 12:30:00"
+        "updated": "2026-02-15 12:40:00"
     },
     "os_tools": [
         {
@@ -921,6 +921,16 @@
             "platforms": {
                 "win32": "WiresharkFoundation.Wireshark",
                 "darwin": "wireshark"
+            }
+        },
+        {
+            "id": "xampp",
+            "name": "XAMPP",
+            "category": "Solution Stack",
+            "description": "An easy-to-install Apache distribution containing MariaDB, PHP, and Perl. Perfect for local PHP development environments.",
+            "platforms": {
+                "win32": "ApacheFriends.Xampp.8.2",
+                "darwin": "xampp"
             }
         },
         {
