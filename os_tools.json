@@ -1,6 +1,6 @@
 {
     "header": {
-        "project": "Universal Dev Registry",
+        "project": "List of Developer Specific installable desktop apps",
         "owner": "Ambastha / Ambastha-Org",
         "license": "CC BY-NC 4.0 (Attribution-NonCommercial)",
         "notice": "Copyright (c) 2025-2026. Commercial use or unauthorized cloning of this registry architecture is strictly prohibited."
@@ -38,6 +38,14 @@
             }
         },
         {
+            "id": "btop4win",
+            "name": "btop4win",
+            "description": "A beautiful resource monitor that shows usage and stats for processor, memory, disks, network, and processes. The C++ version of btop++ for Windows.",
+            "platforms": {
+                "win32": "aristocratos.btop4win"
+            }
+        },
+        {
             "id": "bun",
             "name": "Bun",
             "description": "Incredibly fast all-in-one JavaScript runtime, package manager, and bundler.",
@@ -53,6 +61,14 @@
             "platforms": {
                 "win32": "PortSwigger.BurpSuite.Community",
                 "darwin": "burp-suite"
+            }
+        },
+        {
+            "id": "cascadia-code",
+            "name": "Cascadia Code",
+            "description": "A modern monospaced font that includes programming ligatures and is designed to enhance the Windows Terminal experience.",
+            "platforms": {
+                "win32": "Microsoft.CascadiaCode"
             }
         },
         {
@@ -83,6 +99,15 @@
             }
         },
         {
+            "id": "cloudflared",
+            "name": "Cloudflared",
+            "description": "Cloudflare Tunnel client that provides a secure way to connect your local resources to the Cloudflare network without a public IP.",
+            "platforms": {
+                "win32": "Cloudflare.cloudflared",
+                "darwin": "cloudflared"
+            }
+        },
+        {
             "id": "cockroachdb",
             "name": "CockroachDB",
             "description": "Distributed SQL database designed for cloud-native applications.",
@@ -107,6 +132,15 @@
             "platforms": {
                 "win32": "Apache.CouchDB",
                 "darwin": "couchdb"
+            }
+        },
+        {
+            "id": "dart-sdk",
+            "name": "Dart SDK",
+            "description": "A client-optimized programming language for multi-platform apps, featuring the VM, libraries, and CLI tools.",
+            "platforms": {
+                "win32": "Google.DartSDK",
+                "darwin": "dart"
             }
         },
         {
@@ -191,6 +225,15 @@
             }
         },
         {
+            "id": "erlang",
+            "name": "Erlang OTP",
+            "description": "The Erlang programming language runtime. This is the mandatory foundation required to run Elixir.",
+            "platforms": {
+                "win32": "Erlang.ErlangOTP",
+                "darwin": "erlang"
+            }
+        },
+        {
             "id": "fiddler",
             "name": "Fiddler Everywhere",
             "description": "Secure, cross-platform web debugging proxy.",
@@ -233,6 +276,24 @@
             "platforms": {
                 "win32": "GitHub.GitHubDesktop",
                 "darwin": "github-desktop"
+            }
+        },
+        {
+            "id": "gitkraken",
+            "name": "GitKraken",
+            "description": "A powerful cross-platform GUI Git client designed to simplify and streamline Git workflows and repo management.",
+            "platforms": {
+                "win32": "Axosoft.GitKraken",
+                "darwin": "gitkraken"
+            }
+        },
+        {
+            "id": "gleam",
+            "name": "Gleam",
+            "description": "A type-safe functional language for building scalable systems. Runs on the Erlang VM and JavaScript runtimes.",
+            "platforms": {
+                "win32": "Gleam.Gleam",
+                "darwin": "gleam"
             }
         },
         {
@@ -299,6 +360,15 @@
             }
         },
         {
+            "id": "influxdb-oss",
+            "name": "InfluxDB OSS",
+            "description": "The open-source time series database optimized for high-availability storage and retrieval of time-stamped data.",
+            "platforms": {
+                "win32": "InfluxData.InfluxDB.OSS",
+                "darwin": "influxdb"
+            }
+        },
+        {
             "id": "inkscape",
             "name": "Inkscape",
             "description": "Professional vector graphics editor for creating SVG and vector art.",
@@ -326,12 +396,29 @@
             }
         },
         {
+            "id": "jetbrains-mono-nf",
+            "name": "JetBrains Mono Nerd Font",
+            "description": "A developer-focused font with ligatures and patched with a high number of icons (Nerd Fonts).",
+            "platforms": {
+                "win32": "DEVCOM.JetBrainsMonoNerdFont"
+            }
+        },
+        {
             "id": "julia",
             "name": "Julia",
             "description": "High-level, high-performance language for numerical computing.",
             "platforms": {
                 "win32": "JuliaLang.Julia",
                 "darwin": "julia"
+            }
+        },
+        {
+            "id": "kotlin-compiler",
+            "name": "Kotlin Compiler",
+            "description": "A modern, cross-platform, statically typed programming language that is fully interoperable with Java.",
+            "platforms": {
+                "win32": "JetBrains.Kotlin",
+                "darwin": "kotlin"
             }
         },
         {
@@ -368,6 +455,23 @@
             "platforms": {
                 "win32": "LLVM.LLVM",
                 "darwin": "llvm"
+            }
+        },
+        {
+            "id": "localstack-cli",
+            "name": "LocalStack CLI",
+            "description": "A fully functional local AWS cloud stack. Develop and test your cloud apps offline.",
+            "platforms": {
+                "win32": "LocalStack.LocalStack-CLI"
+            }
+        },
+        {
+            "id": "lua",
+            "name": "Lua",
+            "description": "A powerful, efficient, lightweight, embeddable scripting language widely used for games, web servers, and embedded systems.",
+            "platforms": {
+                "win32": "DEVCOM.Lua",
+                "darwin": "lua"
             }
         },
         {
@@ -434,6 +538,14 @@
             }
         },
         {
+            "id": "neo-htop",
+            "name": "NeoHtop",
+            "description": "A cross-platform terminal-based system monitor, aiming to be a faster and more modern version of htop.",
+            "platforms": {
+                "win32": "abdenasser.NeoHtop"
+            }
+        },
+        {
             "id": "neo4j",
             "name": "Neo4j Desktop",
             "description": "Comprehensive environment for graph database development and exploration.",
@@ -497,6 +609,24 @@
             }
         },
         {
+            "id": "oh-my-posh",
+            "name": "Oh My Posh",
+            "description": "A custom prompt engine for any shell that has the ability to render the prompt string with a full color range and icons.",
+            "platforms": {
+                "win32": "JanDeDobbeleer.OhMyPosh",
+                "darwin": "oh-my-posh"
+            }
+        },
+        {
+            "id": "ollama",
+            "name": "Ollama",
+            "description": "Get up and running with large language models locally. Run Llama 3, Mistral, and other models on your machine.",
+            "platforms": {
+                "win32": "Ollama.Ollama",
+                "darwin": "ollama"
+            }
+        },
+        {
             "id": "openjdk",
             "name": "OpenJDK",
             "description": "Open-source implementation of the Java Platform, Standard Edition.",
@@ -512,6 +642,15 @@
             "platforms": {
                 "win32": "Oracle.JDK.25",
                 "darwin": "oracle-jdk"
+            }
+        },
+        {
+            "id": "opentofu",
+            "name": "OpenTofu",
+            "description": "The open-source infrastructure as code tool, a community-driven fork of Terraform.",
+            "platforms": {
+                "win32": "OpenTofu.Tofu",
+                "darwin": "opentofu"
             }
         },
         {
@@ -668,6 +807,15 @@
             }
         },
         {
+            "id": "surrealdb",
+            "name": "SurrealDB",
+            "description": "A scalable, cloud-native, end-to-end multi-model database for the web, mobile, serverless, and jamstack applications.",
+            "platforms": {
+                "win32": "SurrealDB.SurrealDB",
+                "darwin": "surrealdb/tap/surreal"
+            }
+        },
+        {
             "id": "swift",
             "name": "Swift",
             "description": "Apple's powerful and intuitive language for building iOS and macOS apps.",
@@ -686,6 +834,24 @@
             }
         },
         {
+            "id": "tailscale",
+            "name": "Tailscale",
+            "description": "A mesh VPN that uses WireGuard to create secure, private networks between your computers, servers, and cloud instances.",
+            "platforms": {
+                "win32": "Tailscale.Tailscale",
+                "darwin": "tailscale"
+            }
+        },
+        {
+            "id": "terraform",
+            "name": "HashiCorp Terraform",
+            "description": "An infrastructure as code tool that lets you build, change, and version cloud and on-prem resources safely and efficiently.",
+            "platforms": {
+                "win32": "Hashicorp.Terraform",
+                "darwin": "terraform"
+            }
+        },
+        {
             "id": "unity_hub",
             "name": "Unity Hub",
             "description": "Management tool for Unity projects and editor installations.",
@@ -701,6 +867,15 @@
             "platforms": {
                 "win32": "Hashicorp.Vagrant",
                 "darwin": "vagrant"
+            }
+        },
+        {
+            "id": "vfox",
+            "name": "vfox (Version Fox)",
+            "description": "A cross-platform version manager used to install and switch between multiple versions of Elixir and other languages.",
+            "platforms": {
+                "win32": "version-fox.vfox",
+                "darwin": "vfox"
             }
         },
         {
